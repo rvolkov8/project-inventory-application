@@ -1,0 +1,47 @@
+header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 180px;
+}
+
+.header-bg {
+  background-color: var(--black);
+  opacity: 0.97;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.logo {
+  color: var(--white);
+  font-weight: 800;
+  font-size: 1.6rem;
+  cursor: default;
+  z-index: 1;
+}
+
+.logo > span {
+  color: var(--turquoise);
+}
+
+nav {
+  display: grid;
+  grid-template-columns: repeat(3, 150px);
+  justify-content: center;
+  text-align: center;
+  z-index: 2;
+}
+
+nav > * {
+  color: var(--white);
+  font-weight: 300;
+}
+
+nav > *:hover {
+  font-weight: 700;
+}

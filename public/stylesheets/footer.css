@@ -1,0 +1,27 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: var(--black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+footer > a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+footer > a > h3 {
+  font-weight: 400;
+  color: var(--white);
+}
+
+footer > a > img {
+  width: 18px;
+  height: auto;
+}

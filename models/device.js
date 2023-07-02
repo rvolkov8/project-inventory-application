@@ -5,6 +5,7 @@ const deviceSchema = new Schema({
   name: { type: String, required: true },
   category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
   price: { type: Number, required: true },
+  newPrice: { type: Number, default: null },
   description: { type: String, required: true },
   numberInStock: { type: Number, required: true },
   newArrival: Boolean,

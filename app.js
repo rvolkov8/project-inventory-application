@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const indexRouter = require('./routes/index');
 
@@ -11,6 +13,14 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// mongodb connection setup
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => console.log('mongodb connected'))
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+  });
 
 app.use(logger('dev'));
 app.use(express.json());

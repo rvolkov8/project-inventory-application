@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  color: var(--black);
 }
 
 :root {
@@ -15,6 +16,7 @@
   --gray: #9f9f9f;
   --white: #ffffff;
   --red: #d4736f;
+  --dark-red: #d05c58;
   --turquoise: #56aba7;
   --light-turquoise: #66c5c0;
   --lightest-turquoise: #f4fafa;

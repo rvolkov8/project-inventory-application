@@ -8,4 +8,7 @@ router.get('/', deviceController.index);
 //GET a particular category list
 router.get('/:category', deviceController.getCategoryList);
 
+//GET a particular item
+router.get('/:category/:id', deviceController.getItem);
+
 module.exports = router;

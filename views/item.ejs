@@ -12,7 +12,7 @@
     />
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/header.css" />
-    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <link rel="stylesheet" href="/stylesheets/item.css" />
     <link rel="stylesheet" href="/stylesheets/footer.css" />
   </head>
   <body>
@@ -26,69 +26,42 @@
       <div class="header-bg"></div>
     </header>
     <main>
-      <a href="/shop/laptops">
-        <img
-          src="/images/banners/apple-logo.webp"
-          alt="Apple logo"
-          class="apple-logo"
-        />
-        <img
-          src="/images/banners/banner.webp"
-          alt="Banner"
-          class="main-banner"
-        />
-      </a>
-      <section class="main-categories">
-        <% categories.forEach(category => { %>
-        <a href="<%= category.url %>" class="main-category">
-          <img
-            src="/images/categories/<%= category.name.toLowerCase() %>.webp"
-            alt="Category"
-          />
-        </a>
-        <% }); %>
-      </section>
-      <section class="new-arrivals">
-        <div class="new-arrivals-header">
-          <h1>New Arrivals</h1>
-          <div class="main-divider"></div>
-        </div>
-        <div class="new-arrivals-grid">
-          <% newArrivals.forEach(item => { %>
-          <div class="new-arrivals-item">
+      <section class="item">
+        <div class="item-grid">
+          <div class="photo-cell">
             <img src="/images/devices/<%= item.fileName %>" alt="Device" />
-            <h2 class="new-arrivals-item-name"><%= item.name %></h2>
-            <% if(item.newPrice) { %>
-            <p class="new-arrivals-item-old-price">
-              <%= ( item.price.toLocaleString('en-US', { style: 'currency',
-              currency: 'USD' }) ) %>
-            </p>
-            <p class="new-arrivals-item-new-price">
-              <%= item.newPrice.toLocaleString('en-US', { style: 'currency',
-              currency: 'USD' }) %>
-            </p>
-            <% } else { %>
-            <p class="new-arrivals-item-price">
-              <%= item.price.toLocaleString('en-US', { style: 'currency',
-              currency: 'USD' }) %>
-            </p>
-            <% } %>
-            <a
-              href="/shop/<%= item.category.name.toLowerCase() %>/<%= item._id %>"
-            >
-              View details
-            </a>
           </div>
-          <% }); %>
+          <div class="info-cell">
+            <div class="info-heading">
+              <div class="category"><%= item.category.name %></div>
+              <div class="device-name"><%= item.name %></div>
+            </div>
+            <div class="price-container">
+              <% if (item.newPrice !== null) { %>
+              <p class="new-price">
+                <%= item.newPrice.toLocaleString('en-US', { style: 'currency',
+                currency: 'USD' }) %>
+              </p>
+              <p class="old-price">
+                <%= item.price.toLocaleString('en-US', { style: 'currency',
+                currency: 'USD' }) %>
+              </p>
+              <% } else { %>
+              <p class="price">
+                <%= item.price.toLocaleString('en-US', { style: 'currency',
+                currency: 'USD' }) %>
+              </p>
+              <% } %>
+            </div>
+            <div class="description"><%= item.description %></div>
+            <div class="in-stock">In stock: <%= item.numberInStock %></div>
+            <div class="buttons-container">
+              <a href="<%= item.url %>/delete" class="delete-button">Delete</a>
+              <a href="<%= item.url %>/update" class="update-button">Update</a>
+            </div>
+          </div>
         </div>
       </section>
-      <a href="/shop/laptops">
-        <img
-          src="/images/banners/deal-of-the-week-banner.webp"
-          alt="Banner"
-          class="deal-of-the-week-banner"
-        />
-      </a>
       <section class="additions">
         <div class="additions-grid">
           <div class="addition-container">

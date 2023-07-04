@@ -47,3 +47,13 @@ exports.getCategoryList = asyncHandler(async (req, res, next) => {
     categoryItems: categoryItems,
   });
 });
+
+// GET a particular item
+exports.getItem = asyncHandler(async (req, res, next) => {
+  const categories = await Category.find().sort('name').exec();
+  const id = req.params.id;
+
+  const item = await Device.findOne({ _id: id }).populate('category').exec();
+
+  res.render('item', { categories: categories, item: item });
+});

@@ -13,7 +13,7 @@ const deviceSchema = new Schema({
 });
 
 deviceSchema.virtual('url').get(function () {
-  return `/shop/${this.category}/${this._id}`;
+  return `/shop/${this.category.name.toLowerCase()}/${this._id}`;
 });
 
 module.exports = mongoose.model('Device', deviceSchema);

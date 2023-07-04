@@ -21,7 +21,6 @@ header {
   color: var(--white);
   font-weight: 800;
   font-size: 1.6rem;
-  cursor: default;
   z-index: 1;
 }
 

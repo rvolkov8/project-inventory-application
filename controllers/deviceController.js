@@ -1,6 +1,7 @@
 const Device = require('../models/device');
 const Category = require('../models/category');
 const asyncHandler = require('express-async-handler');
+const { default: mongoose } = require('mongoose');
 
 // GET Homepage
 exports.index = asyncHandler(async (req, res, next) => {
@@ -17,7 +18,6 @@ exports.index = asyncHandler(async (req, res, next) => {
     })
     .limit(8)
     .exec();
-  console.log(newArrivals);
   res.render('index', { categories: categories, newArrivals: newArrivals });
 });
 
@@ -56,4 +56,55 @@ exports.getItem = asyncHandler(async (req, res, next) => {
   const item = await Device.findOne({ _id: id }).populate('category').exec();
 
   res.render('item', { categories: categories, item: item });
+});
+
+// GET update form for a particular item
+exports.getUpdateItem = asyncHandler(async (req, res, next) => {
+  const categories = await Category.find().sort('name').exec();
+  const id = req.params.id;
+
+  const item = await Device.findOne({ _id: id }).populate('category').exec();
+  console.log(item.newArrival);
+
+  res.render('item-update', {
+    categories: categories,
+    item: item,
+  });
+});
+
+// POST update a particular item
+exports.postUpdateItem = asyncHandler(async (req, res, next) => {
+  const id = req.params.id;
+  const body = req.body;
+
+  const item = await Device.findOne({ _id: id }).populate('category').exec();
+
+  const usersCollection = mongoose.connection.db.collection('users');
+  const admin = await usersCollection.findOne({ name: 'admin' });
+
+  if (admin.password !== parseInt(body.password)) {
+    res.status(401).send('Unauthorized access');
+  } else {
+    await Device.findByIdAndUpdate(
+      { _id: id },
+      {
+        name: body.name,
+        category: await Category.findOne({ name: body.category }),
+        price: parseInt(body.price),
+        newPrice: body.newPrice.trim() ? parseInt(body.newPrice) : null,
+        description: body.description,
+        numberInStock: parseInt(body.numberInStock),
+        newArrival: body.newArrival === 'on' ? true : false,
+      }
+    );
+    if (req.file) {
+      await Device.findByIdAndUpdate(
+        { _id: id },
+        {
+          fileName: req.file.filename,
+        }
+      );
+    }
+    res.redirect(item.url);
+  }
 });

@@ -66,7 +66,7 @@ exports.getUpdateItem = asyncHandler(async (req, res, next) => {
   const item = await Device.findOne({ _id: id }).populate('category').exec();
   console.log(item.newArrival);
 
-  res.render('item-update', {
+  res.render('itemUpdate', {
     categories: categories,
     item: item,
   });
@@ -117,7 +117,7 @@ exports.getDeleteItem = asyncHandler(async (req, res, next) => {
   const item = await Device.findOne({ _id: id }).populate('category').exec();
   console.log(item.newArrival);
 
-  res.render('item-delete', {
+  res.render('itemDelete', {
     categories: categories,
     item: item,
   });
@@ -137,5 +137,37 @@ exports.postDeleteItem = asyncHandler(async (req, res, next) => {
   } else {
     await Device.findByIdAndDelete({ _id: id });
     res.redirect(`/shop/${category}`);
+  }
+});
+
+//GET create an item form
+exports.getCreateItem = asyncHandler(async (req, res, next) => {
+  const categories = await Category.find().sort('name').exec();
+  res.render('itemCreate', { categories: categories });
+});
+
+//POST create an item form
+exports.postCreateItem = asyncHandler(async (req, res, next) => {
+  const body = req.body;
+
+  const usersCollection = mongoose.connection.db.collection('users');
+  const admin = await usersCollection.findOne({ name: 'admin' });
+
+  if (admin.password !== parseInt(body.password)) {
+    res.status(401).send('Unauthorized access');
+  } else {
+    const deviceDetail = {
+      name: body.name,
+      category: await Category.findOne({ name: body.category }),
+      price: body.price,
+      newPrice: body.newPrice ? body.newPrice : null,
+      description: body.description,
+      numberInStock: body.numberInStock,
+      newArrival: body.newArrival === 'on' ? true : false,
+      fileName: req.file.filename,
+    };
+    const newDevice = new Device(deviceDetail);
+    await newDevice.save();
+    res.redirect(`/shop/${newDevice.category}/${newDevice._id}`);
   }
 });

@@ -17,6 +17,16 @@ const upload = multer({ storage: storage });
 // GET home page
 router.get('/', deviceController.index);
 
+//GET create an item form
+router.get('/create', deviceController.getCreateItem);
+
+//POST create an item form
+router.post(
+  '/create',
+  upload.single('fileName'),
+  deviceController.postCreateItem
+);
+
 //GET a particular category list
 router.get('/:category', deviceController.getCategoryList);
 

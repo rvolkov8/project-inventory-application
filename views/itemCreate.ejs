@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechHub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/stylesheets/header.css" />
+    <link rel="stylesheet" href="/stylesheets/itemCreate.css" />
+    <link rel="stylesheet" href="/stylesheets/footer.css" />
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo">Tech<span>Hub</span></a>
+      <nav>
+        <% categories.forEach(category => { %>
+        <a href="<%= category.url %>"> <%= category.name %> </a>
+        <% }); %>
+      </nav>
+      <div class="header-bg"></div>
+    </header>
+    <main>
+      <section class="item">
+        <div class="item-heading">
+          <h1>Add a new product</h1>
+          <div class="main-divider"></div>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+          <div class="info-heading">
+            <label for="category">Choose category:</label>
+            <select name="category" id="category" required>
+              <% categories.forEach(category => { %>
+              <option value="<%= category.name %>"><%= category.name %></option>
+              <% }); %>
+            </select>
+            <label for="device-name">Enter a device name:</label>
+            <input
+              name="name"
+              id="device-name"
+              placeholder="e.g. MacBook Air 15"
+              maxlength="40"
+              required
+            />
+          </div>
+          <div class="price-container">
+            <label for="price"
+              >Enter a default price:
+              <input
+                type="number"
+                id="price"
+                name="price"
+                maxlength="20"
+                placeholder="e.g. 1299.99"
+                required
+              />
+            </label>
+            <label for="new-price"
+              >Enter a new price:
+              <input
+                type="number"
+                id="new-price"
+                name="newPrice"
+                maxlength="20"
+                placeholder="e.g. 1099.99"
+              />
+            </label>
+          </div>
+          <label for="description"
+            >Enter a description:
+            <textarea
+              id="description"
+              name="description"
+              maxlength="600"
+              placeholder="e.g. The new 15-inch MacBook Air makes room for more of what you love with a spacious Liquid Retina display."
+              required
+            ></textarea>
+          </label>
+          <label for="in-stock"
+            >In stock:
+            <input
+              type="text"
+              id="in-stock"
+              name="numberInStock"
+              maxlength="3"
+              placeholder="123"
+              required
+            />
+          </label>
+          <label for="new-arrival" class="new-arrival"
+            >Is the device a new arrival?
+            <input type="checkbox" name="newArrival" id="new-arrival"
+          /></label>
+          <label for="device-picture" class="device-picture">
+            Choose a new device picture if needed:
+            <input
+              type="file"
+              name="fileName"
+              id="device-picture"
+              accept="image/png, image/jpeg, image/jpeg, image/webp"
+              required
+            />
+          </label>
+          <label for="password">
+            Password:
+            <input type="password" name="password" id="password" required />
+          </label>
+          <div class="buttons-container">
+            <a href="/" class="cancel-button">Cancel</a>
+            <input type="submit" class="submit-button" />
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <a
+        href="https://github.com/rvolkov8/project-inventory-application"
+        target="_blank"
+      >
+        <h3 class="nickname">rvolkov8</h3>
+        <img src="/images/icons/github.svg" alt="Icon" />
+      </a>
+    </footer>
+  </body>
+</html>

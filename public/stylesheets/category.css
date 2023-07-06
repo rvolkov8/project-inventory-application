@@ -41,7 +41,8 @@ main {
   row-gap: 10px;
 }
 
-.category-item {
+.category-item,
+.add-category-item {
   padding: 15px 0 0 0;
   display: grid;
   grid-template-rows: 1fr 50px 20px 30px 40px;
@@ -53,12 +54,18 @@ main {
   transition: border 0.2s 0.05s, box-shadow 0.2s 0.05s;
 }
 
-.category-item:hover {
+.add-category-item {
+  cursor: pointer;
+}
+
+.category-item:hover,
+.add-category-item:hover {
   border: 1px solid var(--gray);
   box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.25);
 }
 
-.category-item > img {
+.category-item > img,
+.add-category-item > img {
   width: 100%;
   max-height: 160px;
   object-fit: contain;
@@ -69,13 +76,27 @@ main {
   align-self: center;
 }
 
-.category-item-name {
+.add-category-item > img {
+  transform: rotate(0deg);
+  transition: transform 0.6s;
+}
+
+.add-category-item:hover > img {
+  transform: rotate(180deg);
+}
+
+.category-item-name,
+.add-category-item-text {
   color: var(--black);
   font-weight: 700;
   grid-row: 2 / 3;
   padding: 0 15px;
   margin-top: 10px;
   cursor: default;
+}
+
+.add-category-item-text {
+  cursor: pointer;
 }
 
 .category-item-price {

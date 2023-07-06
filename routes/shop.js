@@ -33,4 +33,10 @@ router.post(
   deviceController.postUpdateItem
 );
 
+//GET delete form for a particular item
+router.get('/:category/:id/delete', deviceController.getDeleteItem);
+
+//Post delete a particular item
+router.post('/:category/:id/delete', deviceController.postDeleteItem);
+
 module.exports = router;

@@ -1,0 +1,171 @@
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 65px;
+  padding: 65px 0 0 0;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+}
+
+.item-grid {
+  width: calc(100vw - 360px);
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  column-gap: 60px;
+}
+
+/* .photo-cell {
+} */
+
+.photo-cell > img {
+  position: sticky;
+  top: calc(80px + 65px);
+  width: 100%;
+  height: auto;
+}
+
+.info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--black);
+}
+
+.info-heading {
+  padding: 0 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--gray);
+  cursor: default;
+}
+
+.category {
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.device-name {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.confirmation-question {
+  text-align: justify;
+  font-weight: 400;
+  font-weight: 700;
+  cursor: default;
+}
+
+#password:focus {
+  outline: 1px solid var(--gray);
+  border-radius: 6px;
+  border: none;
+  border: 1px solid var(--white);
+}
+
+#description {
+  text-align: justify;
+  font-weight: 400;
+  width: 100%;
+  min-height: 150px;
+  padding: 10px;
+  resize: none;
+  border: 1px solid var(--black);
+  border-radius: 12px;
+  margin-top: 5px;
+}
+
+label.password {
+  font-weight: 700;
+}
+
+#password {
+  font-size: 1.2rem;
+  width: 50px;
+  border: 1px solid var(--white);
+  border-bottom: 1px solid var(--gray);
+  padding-left: 5px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.buttons-container > a,
+.buttons-container > button {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 10px 35px;
+  border-radius: 12px;
+  border: none;
+}
+
+.cancel-button {
+  color: var(--gray);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cancel-button:hover {
+  color: var(--black);
+}
+
+.delete-button {
+  background-color: var(--red);
+  color: var(--white);
+  transition: background-color 0.2s;
+}
+
+.delete-button:hover {
+  background-color: var(--dark-red);
+  cursor: pointer;
+}
+
+.additions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 65px;
+}
+
+.additions-grid {
+  display: grid;
+  width: calc(100vw - 360px);
+  grid-template-columns: repeat(4, calc((100vw - 360px - 75px) / 4));
+  gap: 25px;
+}
+
+.addition-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--lightest-turquoise);
+  border-radius: 12px;
+  padding: 35px 0;
+  cursor: default;
+}
+
+.addition-text {
+  display: flex;
+  flex-direction: column;
+  color: var(--black);
+}
+
+.addition-text > h3 {
+  font-weight: 700;
+}
+
+.addition-text > p {
+  font-weight: 300;
+}
+
+.addition-container > img {
+  width: 50px;
+  height: 50px;
+}

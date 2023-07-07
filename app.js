@@ -5,11 +5,24 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 require('dotenv').config();
+const compression = require('compression');
+const helmet = require('helmet');
+const RateLimit = require('express-rate-limit');
 
 const indexRouter = require('./routes/index');
 const shopRouter = require('./routes/shop');
 
 const app = express();
+
+// Set up rate limiter: maximum of twenty requests per minute
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 300,
+});
+// Apply rate limiter to all requests
+app.use(limiter);
+
+app.use(helmet());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +40,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(compression()); // Compress all routes
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

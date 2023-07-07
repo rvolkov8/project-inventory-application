@@ -3,6 +3,7 @@ const router = express.Router();
 const deviceController = require('../controllers/deviceController');
 const multer = require('multer');
 const path = require('path');
+const { body } = require('express-validator');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -24,6 +25,11 @@ router.get('/create', deviceController.getCreateItem);
 router.post(
   '/create',
   upload.single('fileName'),
+  body('name').trim().notEmpty(),
+  body('price').notEmpty().isFloat(),
+  body('newPrice').optional().notEmpty().isFloat(),
+  body('description').trim().notEmpty(),
+  body('numberInStock').notEmpty().isFloat(),
   deviceController.postCreateItem
 );
 
@@ -40,6 +46,11 @@ router.get('/:category/:id/update', deviceController.getUpdateItem);
 router.post(
   '/:category/:id/update',
   upload.single('fileName'),
+  body('name').trim().notEmpty(),
+  body('price').notEmpty().isFloat(),
+  body('newPrice').optional().notEmpty().isFloat(),
+  body('description').trim().notEmpty(),
+  body('numberInStock').notEmpty().isFloat(),
   deviceController.postUpdateItem
 );
 

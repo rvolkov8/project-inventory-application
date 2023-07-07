@@ -2,6 +2,7 @@ const Device = require('../models/device');
 const Category = require('../models/category');
 const asyncHandler = require('express-async-handler');
 const { default: mongoose } = require('mongoose');
+const { validationResult } = require('express-validator');
 
 // GET Homepage
 exports.index = asyncHandler(async (req, res, next) => {
@@ -74,6 +75,11 @@ exports.getUpdateItem = asyncHandler(async (req, res, next) => {
 
 // POST update a particular item
 exports.postUpdateItem = asyncHandler(async (req, res, next) => {
+  const result = validationResult(req);
+  // if (!result.isEmpty()) {
+  res.send({ errors: result.array() });
+  // }
+
   const id = req.params.id;
   const body = req.body;
 
@@ -148,6 +154,11 @@ exports.getCreateItem = asyncHandler(async (req, res, next) => {
 
 //POST create an item form
 exports.postCreateItem = asyncHandler(async (req, res, next) => {
+  const result = validationResult(req);
+  if (!result.isEmpty()) {
+    res.send({ errors: result.array() });
+  }
+
   const body = req.body;
 
   const usersCollection = mongoose.connection.db.collection('users');

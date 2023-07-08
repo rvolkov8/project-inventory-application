@@ -25,11 +25,15 @@ router.get('/create', deviceController.getCreateItem);
 router.post(
   '/create',
   upload.single('fileName'),
-  body('name').trim().notEmpty(),
-  body('price').notEmpty().isFloat(),
-  body('newPrice').optional().notEmpty().isFloat(),
-  body('description').trim().notEmpty(),
-  body('numberInStock').notEmpty().isFloat(),
+  body('name').trim().notEmpty().withMessage('Name field is empty.').escape(),
+  body('price').isFloat().escape(),
+  body('newPrice').optional().isFloat().escape(),
+  body('description')
+    .trim()
+    .notEmpty()
+    .withMessage('Description field is empty.')
+    .escape(),
+  body('numberInStock').isFloat().escape(),
   deviceController.postCreateItem
 );
 
@@ -46,11 +50,15 @@ router.get('/:category/:id/update', deviceController.getUpdateItem);
 router.post(
   '/:category/:id/update',
   upload.single('fileName'),
-  body('name').trim().notEmpty(),
-  body('price').notEmpty().isFloat(),
-  body('newPrice').optional().notEmpty().isFloat(),
-  body('description').trim().notEmpty(),
-  body('numberInStock').notEmpty().isFloat(),
+  body('name').trim().notEmpty().withMessage('Name field is empty.').escape(),
+  body('price').isFloat().escape(),
+  body('newPrice').optional().isFloat().escape(),
+  body('description')
+    .trim()
+    .notEmpty()
+    .withMessage('Description field is empty.')
+    .escape(),
+  body('numberInStock').isFloat().escape(),
   deviceController.postUpdateItem
 );
 

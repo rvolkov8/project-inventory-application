@@ -1,0 +1,9 @@
+<header>
+  <a href="/" class="logo">Tech<span>Hub</span></a>
+  <nav>
+    <% categories.forEach(category => { %>
+    <a href="<%= category.url %>"> <%= category.name %> </a>
+    <% }); %>
+  </nav>
+  <div class="header-bg"></div>
+</header>

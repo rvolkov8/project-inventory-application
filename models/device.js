@@ -8,7 +8,7 @@ const deviceSchema = new Schema({
   newPrice: { type: Number, default: null },
   description: { type: String, required: true },
   numberInStock: { type: Number, required: true },
-  newArrival: Boolean,
+  newArrival: { type: Boolean, required: true },
   fileName: { type: String, required: true },
 });
 

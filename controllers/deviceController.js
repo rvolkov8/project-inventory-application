@@ -1,5 +1,6 @@
 const Device = require('../models/device');
 const Category = require('../models/category');
+const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const { default: mongoose } = require('mongoose');
 const { validationResult } = require('express-validator');

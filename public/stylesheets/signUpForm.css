@@ -1,0 +1,115 @@
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 65px;
+  padding: 65px 0 65px 0;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 45px;
+}
+
+.heading > h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  cursor: default;
+}
+
+.main-divider {
+  width: 200px;
+  height: 5px;
+  background-color: var(--turquoise);
+}
+
+.log-in-container {
+  margin-bottom: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-in-container > h2 {
+  font-size: 1.3rem;
+  font-weight: 400;
+  cursor: default;
+}
+
+.log-in-container > h2 > a {
+  color: var(--turquoise);
+}
+
+.log-in-container > h2 > a:hover {
+  text-decoration: underline;
+}
+
+.sign-up {
+  color: var(--black);
+  align-self: center;
+  width: calc(100vw - 720px);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-item {
+  gap: 10px;
+  width: 100%;
+  gap: 5pxc;
+}
+
+label {
+  font-weight: 400;
+  cursor: pointer;
+}
+
+input {
+  font-size: 2rem;
+  font-weight: 700;
+  border: 1px solid var(--white);
+  border-bottom: 1px solid var(--gray);
+  padding-left: 5px;
+  margin-top: 5px;
+  width: 100%;
+}
+
+input::placeholder {
+  color: var(--gray);
+}
+
+input:focus {
+  outline: 1px solid var(--gray);
+  border-radius: 6px;
+  border: none;
+  border: 1px solid var(--white);
+}
+
+.buttons-container {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 12px 45px;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--turquoise);
+  color: var(--white);
+  align-self: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+button:hover {
+  background-color: var(--light-turquoise);
+  cursor: pointer;
+}

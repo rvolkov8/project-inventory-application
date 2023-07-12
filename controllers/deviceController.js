@@ -1,6 +1,5 @@
 const Device = require('../models/device');
 const Category = require('../models/category');
-const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const { default: mongoose } = require('mongoose');
 const { validationResult } = require('express-validator');
@@ -77,9 +76,9 @@ exports.getUpdateItem = asyncHandler(async (req, res, next) => {
 // POST update a particular item
 exports.postUpdateItem = asyncHandler(async (req, res, next) => {
   const result = validationResult(req);
-  // if (!result.isEmpty()) {
-  res.send({ errors: result.array() });
-  // }
+  if (!result.isEmpty()) {
+    res.send({ errors: result.array() });
+  }
 
   const id = req.params.id;
   const body = req.body;

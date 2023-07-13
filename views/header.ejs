@@ -5,5 +5,14 @@
     <a href="<%= category.url %>"> <%= category.name %> </a>
     <% }); %>
   </nav>
+  <a href="/log-in" class="log-in-header">
+    <% if (currentUser) { %>
+    <img src="/images/icons/profile-header.svg" alt="Login" />
+    <div><%= currentUser.username %></div>
+    <% } else { %>
+    <img src="/images/icons/login-header.svg" alt="Login" />
+    <div>Log In</div>
+    <% } %>
+  </a>
   <div class="header-bg"></div>
 </header>

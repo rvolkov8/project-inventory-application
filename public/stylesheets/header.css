@@ -45,3 +45,26 @@ nav > * {
 nav > *:hover {
   font-weight: 700;
 }
+
+.log-in-header {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.log-in-header > img {
+  height: 30px;
+}
+
+.log-in-header > div {
+  color: var(--white);
+  min-width: max-content;
+  transition: color 0.2s;
+}
+
+.log-in-header:hover > div,
+.log-in-header:hover > img {
+  color: var(--turquoise);
+  fill: var(--turquoise);
+}

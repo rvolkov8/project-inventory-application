@@ -1,0 +1,119 @@
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 65px;
+  padding: 65px 0 65px 0;
+}
+
+.profile {
+  color: var(--black);
+  align-self: center;
+  width: calc(100vw - 720px - 180px);
+  display: flex;
+  flex-direction: column;
+  gap: 55px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading > h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  cursor: default;
+}
+
+.main-divider {
+  width: 200px;
+  height: 5px;
+  background-color: var(--turquoise);
+}
+
+.already-admin-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.already-admin-heading > h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.already-admin-heading > img {
+  width: 40px;
+  height: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+label {
+  font-weight: 400;
+  cursor: pointer;
+}
+
+form > div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+input {
+  font-size: 2rem;
+  font-weight: 700;
+  border: 1px solid var(--white);
+  border-bottom: 1px solid var(--gray);
+  padding-left: 5px;
+  width: 100%;
+}
+
+input::placeholder {
+  color: var(--gray);
+}
+
+input:focus {
+  outline: 1px solid var(--gray);
+  border-radius: 6px;
+  border: none;
+  border: 1px solid var(--white);
+}
+
+.get-access-button,
+.log-out-button {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 12px 45px;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--turquoise);
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.get-access-button:hover,
+.log-out-button.hover {
+  background-color: var(--light-turquoise);
+}
+
+.get-access-button {
+  min-width: max-content;
+}
+
+.log-out-button {
+  background-color: var(--red);
+  text-align: center;
+}
+
+.log-out-button:hover {
+  background-color: var(--dark-red);
+}

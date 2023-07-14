@@ -12,46 +12,39 @@
     />
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <link rel="stylesheet" href="/stylesheets/header.css" />
-    <link rel="stylesheet" href="/stylesheets/logInForm.css" />
+    <link rel="stylesheet" href="/stylesheets/profile.css" />
     <link rel="stylesheet" href="/stylesheets/footer.css" />
   </head>
   <body>
     <%- include('header') %>
     <main>
-      <section class="log-in">
+      <section class="profile">
         <div class="heading">
-          <h1>Enter your profile</h1>
+          <h1>Hello, <%= currentUser.firstName %></h1>
           <div class="main-divider"></div>
         </div>
-        <div class="sign-up-container">
-          <h2>Don't have a profile? <a href="/sign-up">Sign Up</a></h2>
+        <% if (currentUser.isAdmin) { %>
+        <div class="already-admin-heading">
+          <h2>You're already an admin</h2>
+          <img src="/images/icons/check.svg" alt="Check" />
         </div>
+        <% } else { %>
         <form method="post">
-          <div class="form-item">
-            <label for="username"> Username: </label>
+          <label for="admin-password">Admin Password</label>
+          <div>
             <input
-              name="username"
-              id="username"
-              type="text"
-              placeholder="e.g. jblackwood"
-              minlength="1"
-              max="40"
-              required
-            />
-          </div>
-          <div class="form-item">
-            <label for="password"> Password: </label>
-            <input
-              name="password"
-              id="password"
+              name="adminPassword"
+              id="admin-password"
               type="password"
-              minlength="1"
+              min="1"
               max="16"
               required
             />
+            <button class="get-access-button">Get access</button>
           </div>
-          <button>Log In</button>
         </form>
+        <% } %>
+        <a href="/log-out" class="log-out-button">Log Out</a>
       </section>
     </main>
     <%- include('footer') %>

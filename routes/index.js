@@ -51,4 +51,16 @@ router.post(
   })
 );
 
+//GET log out route
+router.get('/log-out', profileController.getLogOut);
+
+//GET profile page
+router.get('/profile', profileController.getProfile);
+//POST profile page
+router.post(
+  '/profile',
+  body('adminPassword').escape(),
+  profileController.postProfile
+);
+
 module.exports = router;

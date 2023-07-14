@@ -64,12 +64,15 @@
               <%= item.price.toLocaleString('en-US', { style: 'currency',
               currency: 'USD' }) %>
             </p>
-            <% } %>
+            <% } %> <% if (currentUser) { %>
             <a
               href="/shop/<%= item.category.name.toLowerCase() %>/<%= item._id %>"
             >
               View details
             </a>
+            <% } else { %>
+            <a href="/log-in"> Log in to view details </a>
+            <% } %>
           </div>
           <% }); %>
         </div>

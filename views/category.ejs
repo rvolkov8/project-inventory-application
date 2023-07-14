@@ -42,18 +42,31 @@
               <%= item.price.toLocaleString('en-US', { style: 'currency',
               currency: 'USD' }) %>
             </p>
-            <% } %>
+            <% } %> <% if (currentUser) { %>
             <a
               href="/shop/<%= item.category.name.toLowerCase() %>/<%= item._id %>"
             >
               View details
             </a>
+            <% } else { %>
+            <a href="/log-in"> Log in to view details </a>
+            <% } %>
           </div>
-          <% }); %>
+          <% }); %> <% if (currentUser) { %>
           <a class="add-category-item" href="/shop/create">
-            <img src="/images/icons/plus.svg" alt="New item" />
+            <img
+              class="add-item-icon"
+              src="/images/icons/plus.svg"
+              alt="New item"
+            />
             <h2 class="add-category-item-text">Add a new product</h2>
           </a>
+          <% } else { %>
+          <a class="add-category-item" href="/shop/create">
+            <img src="/images/icons/login.svg" alt="New item" />
+            <h2 class="add-category-item-text">Log in to add items</h2>
+          </a>
+          <% } %>
         </div>
       </section>
       <section class="additions">

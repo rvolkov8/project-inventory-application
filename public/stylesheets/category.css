@@ -76,12 +76,12 @@ main {
   align-self: center;
 }
 
-.add-category-item > img {
+.add-category-item > .add-item-icon {
   transform: rotate(0deg);
   transition: transform 0.6s;
 }
 
-.add-category-item:hover > img {
+.add-category-item:hover > .add-item-icon {
   transform: rotate(180deg);
 }
 

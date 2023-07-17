@@ -24,6 +24,9 @@ exports.postSignUpForm = asyncHandler(async (req, res, next) => {
   if (body.password !== body.confirmPassword) {
     return next({ message: 'The password confirmation does not match.' });
   }
+  if (await User.findOne({ username: body.username })) {
+    return next({ message: 'User with the same nickname already exists' });
+  }
 
   bcrypt.genSalt(10, async (err, salt) => {
     if (err) {

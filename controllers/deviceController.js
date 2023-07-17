@@ -1,3 +1,4 @@
+const createError = require('http-errors');
 const Device = require('../models/device');
 const Category = require('../models/category');
 const asyncHandler = require('express-async-handler');
@@ -54,9 +55,12 @@ exports.getItem = asyncHandler(async (req, res, next) => {
   const categories = await Category.find().sort('name').exec();
   const id = req.params.id;
 
-  const item = await Device.findOne({ _id: id }).populate('category').exec();
-
-  res.render('item', { categories: categories, item: item });
+  try {
+    const item = await Device.findOne({ _id: id }).populate('category').exec();
+    res.render('item', { categories: categories, item: item });
+  } catch (error) {
+    next({ message: 'No item with such an ID was found' });
+  }
 });
 
 // GET update form for a particular item
@@ -64,12 +68,15 @@ exports.getUpdateItem = asyncHandler(async (req, res, next) => {
   const categories = await Category.find().sort('name').exec();
   const id = req.params.id;
 
-  const item = await Device.findOne({ _id: id }).populate('category').exec();
-
-  res.render('itemUpdate', {
-    categories: categories,
-    item: item,
-  });
+  try {
+    const item = await Device.findOne({ _id: id }).populate('category').exec();
+    res.render('itemUpdate', {
+      categories: categories,
+      item: item,
+    });
+  } catch (error) {
+    next({ message: 'No item with such an ID was found' });
+  }
 });
 
 // POST update a particular item
@@ -112,19 +119,24 @@ exports.getDeleteItem = asyncHandler(async (req, res, next) => {
   const categories = await Category.find().sort('name').exec();
   const id = req.params.id;
 
-  const item = await Device.findOne({ _id: id }).populate('category').exec();
-
-  res.render('itemDelete', {
-    categories: categories,
-    item: item,
-  });
+  try {
+    const item = await Device.findOne({ _id: id }).populate('category').exec();
+    res.render('itemDelete', {
+      categories: categories,
+      item: item,
+    });
+  } catch (error) {
+    next({ message: 'No item with such an ID was found' });
+  }
 });
 
 // POST delete a particular item
 exports.postDeleteItem = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
   const category = req.params.category;
-  await Device.findByIdAndDelete({ _id: id });
+  await Device.findByIdAndDelete({ _id: id }).catch(() => {
+    next({ message: 'No item with such an ID was found' });
+  });
   res.redirect(`/shop/${category}`);
 });
 

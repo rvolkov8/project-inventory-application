@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
@@ -75,7 +76,17 @@ passport.use(
 );
 
 app.use(logger('dev'));
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(
+  session({
+    secret: 'cats',
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI }),
+    cookie: {
+      maxAge: 8 * 180 * 60 * 1000,
+    },
+  })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.json());

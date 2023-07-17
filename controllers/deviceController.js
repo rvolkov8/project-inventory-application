@@ -29,6 +29,9 @@ exports.getCategoryList = asyncHandler(async (req, res, next) => {
 
   const category = req.params.category;
   const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
+  if (!(await Category.findOne({ name: categoryName }))) {
+    next({ message: 'No such category exists' });
+  }
 
   const categoryItems = await Device.find({
     category: await Category.find({ name: categoryName }).exec(),

@@ -84,34 +84,27 @@ exports.postUpdateItem = asyncHandler(async (req, res, next) => {
 
   const item = await Device.findOne({ _id: id }).populate('category').exec();
 
-  const usersCollection = mongoose.connection.db.collection('users');
-  const admin = await usersCollection.findOne({ name: 'admin' });
-
-  if (admin.password !== parseInt(body.password)) {
-    res.status(401).send('Unauthorized access');
-  } else {
+  await Device.findByIdAndUpdate(
+    { _id: id },
+    {
+      name: body.name.replace(/&quot;/g, '"'),
+      category: await Category.findOne({ name: body.category }),
+      price: parseInt(body.price),
+      newPrice: body.newPrice.trim() ? parseInt(body.newPrice) : null,
+      description: body.description,
+      numberInStock: parseInt(body.numberInStock),
+      newArrival: body.newArrival === 'on' ? true : false,
+    }
+  );
+  if (req.file) {
     await Device.findByIdAndUpdate(
       { _id: id },
       {
-        name: body.name,
-        category: await Category.findOne({ name: body.category }),
-        price: parseInt(body.price),
-        newPrice: body.newPrice.trim() ? parseInt(body.newPrice) : null,
-        description: body.description,
-        numberInStock: parseInt(body.numberInStock),
-        newArrival: body.newArrival === 'on' ? true : false,
+        fileName: req.file.filename,
       }
     );
-    if (req.file) {
-      await Device.findByIdAndUpdate(
-        { _id: id },
-        {
-          fileName: req.file.filename,
-        }
-      );
-    }
-    res.redirect(item.url);
   }
+  res.redirect(item.url);
 });
 
 // GET delete a particular item

@@ -80,8 +80,7 @@ label {
 #device-name:focus,
 #price:focus,
 #new-price:focus,
-#in-stock:focus,
-#password:focus {
+#in-stock:focus {
   outline: 1px solid var(--gray);
   border-radius: 6px;
   border: none;
@@ -105,8 +104,7 @@ label {
   border: 1px solid var(--white);
 }
 
-#in-stock,
-#password {
+#in-stock {
   font-size: 1.2rem;
   width: 50px;
   border: 1px solid var(--white);
@@ -163,6 +161,31 @@ input[type='file'] {
 .submit-button:hover {
   background-color: var(--light-turquoise);
   cursor: pointer;
+}
+
+.access {
+  margin-top: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.access > h1 {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.access > p {
+  font-size: 1.2rem;
+}
+
+.access a {
+  color: var(--turquoise);
+}
+
+.access a:hover {
+  text-decoration: underline;
 }
 
 .additions {

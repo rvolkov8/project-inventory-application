@@ -52,7 +52,7 @@ router.post(
   upload.single('fileName'),
   body('name').trim().notEmpty().withMessage('Name field is empty.').escape(),
   body('price').isFloat().escape(),
-  body('newPrice').optional().isFloat().escape(),
+  body('newPrice').isFloat().escape().optional({ checkFalsy: true }),
   body('description')
     .trim()
     .notEmpty()

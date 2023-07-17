@@ -33,6 +33,10 @@ body {
   background: var(--white);
 }
 
+*::placeholder {
+  color: var(--gray);
+}
+
 h1,
 h2,
 h3 {

@@ -161,24 +161,17 @@ exports.postCreateItem = asyncHandler(async (req, res, next) => {
 
   const body = req.body;
 
-  const usersCollection = mongoose.connection.db.collection('users');
-  const admin = await usersCollection.findOne({ name: 'admin' });
-
-  if (admin.password !== parseInt(body.password)) {
-    res.status(401).send('Unauthorized access');
-  } else {
-    const deviceDetail = {
-      name: body.name,
-      category: await Category.findOne({ name: body.category }),
-      price: body.price,
-      newPrice: body.newPrice ? body.newPrice : null,
-      description: body.description,
-      numberInStock: body.numberInStock,
-      newArrival: body.newArrival === 'on' ? true : false,
-      fileName: req.file.filename,
-    };
-    const newDevice = new Device(deviceDetail);
-    await newDevice.save();
-    res.redirect(`/shop/${newDevice.category}/${newDevice._id}`);
-  }
+  const deviceDetail = {
+    name: body.name,
+    category: await Category.findOne({ name: body.category }),
+    price: body.price,
+    newPrice: body.newPrice ? body.newPrice : null,
+    description: body.description,
+    numberInStock: body.numberInStock,
+    newArrival: body.newArrival === 'on' ? true : false,
+    fileName: req.file.filename,
+  };
+  const newDevice = new Device(deviceDetail);
+  await newDevice.save();
+  res.redirect(`/shop/${newDevice.category}/${newDevice._id}`);
 });

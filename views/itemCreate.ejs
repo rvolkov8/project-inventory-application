@@ -18,6 +18,15 @@
   <body>
     <%- include('header') %>
     <main>
+      <% if (!currentUser) { %>
+      <section class="access">
+        <h1>Unfortunately, you don't have the access to this page.</h1>
+        <p>
+          Please, <a href="/log-in">Log in</a> to view details about this
+          product
+        </p>
+      </section>
+      <% } else {%>
       <section class="item">
         <div class="item-heading">
           <h1>Add a new product</h1>
@@ -113,6 +122,7 @@
           </div>
         </form>
       </section>
+      <% } %>
     </main>
     <%- include('footer') %>
   </body>

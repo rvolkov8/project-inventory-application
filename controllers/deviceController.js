@@ -65,7 +65,6 @@ exports.getUpdateItem = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
 
   const item = await Device.findOne({ _id: id }).populate('category').exec();
-  console.log(item.newArrival);
 
   res.render('itemUpdate', {
     categories: categories,
@@ -121,7 +120,6 @@ exports.getDeleteItem = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
 
   const item = await Device.findOne({ _id: id }).populate('category').exec();
-  console.log(item.newArrival);
 
   res.render('itemDelete', {
     categories: categories,
@@ -133,17 +131,8 @@ exports.getDeleteItem = asyncHandler(async (req, res, next) => {
 exports.postDeleteItem = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
   const category = req.params.category;
-  const body = req.body;
-
-  const usersCollection = mongoose.connection.db.collection('users');
-  const admin = await usersCollection.findOne({ name: 'admin' });
-
-  if (admin.password !== parseInt(body.password)) {
-    res.status(401).send('Unauthorized access');
-  } else {
-    await Device.findByIdAndDelete({ _id: id });
-    res.redirect(`/shop/${category}`);
-  }
+  await Device.findByIdAndDelete({ _id: id });
+  res.redirect(`/shop/${category}`);
 });
 
 //GET create an item form

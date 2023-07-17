@@ -30,7 +30,7 @@ exports.getCategoryList = asyncHandler(async (req, res, next) => {
   const category = req.params.category;
   const categoryName = category.charAt(0).toUpperCase() + category.slice(1);
   if (!(await Category.findOne({ name: categoryName }))) {
-    next({ message: 'No such category exists' });
+    return next({ message: 'No such category exists' });
   }
 
   const categoryItems = await Device.find({
@@ -62,7 +62,7 @@ exports.getItem = asyncHandler(async (req, res, next) => {
     const item = await Device.findOne({ _id: id }).populate('category').exec();
     res.render('item', { categories: categories, item: item });
   } catch (error) {
-    next({ message: 'No item with such an ID was found' });
+    return next({ message: 'No item with such an ID was found' });
   }
 });
 
@@ -78,7 +78,7 @@ exports.getUpdateItem = asyncHandler(async (req, res, next) => {
       item: item,
     });
   } catch (error) {
-    next({ message: 'No item with such an ID was found' });
+    return next({ message: 'No item with such an ID was found' });
   }
 });
 
@@ -129,7 +129,7 @@ exports.getDeleteItem = asyncHandler(async (req, res, next) => {
       item: item,
     });
   } catch (error) {
-    next({ message: 'No item with such an ID was found' });
+    return next({ message: 'No item with such an ID was found' });
   }
 });
 
@@ -138,7 +138,7 @@ exports.postDeleteItem = asyncHandler(async (req, res, next) => {
   const id = req.params.id;
   const category = req.params.category;
   await Device.findByIdAndDelete({ _id: id }).catch(() => {
-    next({ message: 'No item with such an ID was found' });
+    return next({ message: 'No item with such an ID was found' });
   });
   res.redirect(`/shop/${category}`);
 });

@@ -18,6 +18,83 @@
   <body>
     <%- include('header') %>
     <main>
+      <% if (!currentUser) { %>
+      <section class="access">
+        <h1>Unfortunately, you don't have the access to this page.</h1>
+        <p>
+          Please, <a href="/log-in">Log in</a> to view details about this
+          product
+        </p>
+      </section>
+      <% } else if (currentUser && !currentUser.isAdmin) { %>
+      <section class="item">
+        <div class="item-grid">
+          <div class="photo-cell">
+            <img src="/images/devices/<%= item.fileName %>" alt="Device" />
+          </div>
+          <div class="info-cell">
+            <div class="info-heading">
+              <div class="category"><%= item.category.name %></div>
+              <div class="device-name"><%= item.name %></div>
+            </div>
+            <div class="price-container">
+              <% if (item.newPrice !== null) { %>
+              <p class="new-price">
+                <%= item.newPrice.toLocaleString('en-US', { style: 'currency',
+                currency: 'USD' }) %>
+              </p>
+              <p class="old-price">
+                <%= item.price.toLocaleString('en-US', { style: 'currency',
+                currency: 'USD' }) %>
+              </p>
+              <% } else { %>
+              <p class="price">
+                <%= item.price.toLocaleString('en-US', { style: 'currency',
+                currency: 'USD' }) %>
+              </p>
+              <% } %>
+            </div>
+            <div class="description"><%= item.description %></div>
+            <div class="in-stock">In stock: <%= item.numberInStock %></div>
+            <div class="admin-access">
+              <a class="admin-access-link" href="/profile">Get admin access</a>
+              to delete or update products
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="additions">
+        <div class="additions-grid">
+          <div class="addition-container">
+            <img src="/images/icons/free-shipping.svg" alt="Icon" />
+            <div class="addition-text">
+              <h3>Free shipping</h3>
+              <p>on all orders</p>
+            </div>
+          </div>
+          <div class="addition-container">
+            <img src="/images/icons/cash-on-delivery.svg" alt="Icon" />
+            <div class="addition-text">
+              <h3>Cash on delivery</h3>
+            </div>
+          </div>
+          <div class="addition-container">
+            <img src="/images/icons/return.svg" alt="Icon" />
+            <div class="addition-text">
+              <h3>45 day return</h3>
+              <p>free of charge</p>
+            </div>
+          </div>
+          <div class="addition-container">
+            <img src="/images/icons/open-daily.svg" alt="Icon" />
+            <div class="addition-text">
+              <h3>Open daily</h3>
+              <p>8 am - 9 pm</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <% } else { %>
       <section class="item">
         <div class="item-grid">
           <div class="photo-cell">
@@ -85,6 +162,7 @@
           </div>
         </div>
       </section>
+      <% } %>
     </main>
     <%- include('footer') %>
   </body>

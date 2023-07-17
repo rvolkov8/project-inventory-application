@@ -1,4 +1,5 @@
 main {
+  height: 100%;
   display: flex;
   flex-direction: column;
   gap: 65px;
@@ -16,9 +17,6 @@ main {
   grid-template-columns: 1.3fr 1fr;
   column-gap: 60px;
 }
-
-/* .photo-cell {
-} */
 
 .photo-cell > img {
   position: sticky;
@@ -116,6 +114,43 @@ main {
 
 .update-button:hover {
   background-color: var(--light-turquoise);
+}
+
+.access {
+  margin-top: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.access > h1 {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.access > p {
+  font-size: 1.2rem;
+}
+
+.access a {
+  color: var(--turquoise);
+}
+
+.access a:hover {
+  text-decoration: underline;
+}
+
+.admin-access {
+  font-weight: 700;
+}
+
+.admin-access-link {
+  color: var(--turquoise);
+}
+
+.admin-access-link:hover {
+  text-decoration: underline;
 }
 
 .additions {
